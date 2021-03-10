@@ -1,4 +1,17 @@
-site_name: My Docs
+site_name: My Notes
+theme: ivory
+plugins:
+  - pheasant
 nav:
     - Home: index.md
-    - Temp: about.md
+    - Algorithms:
+        - Feature Engineering:
+                - 'Local Outlier Factor': 'about.md'
+        - Feature Elimination:
+            - 'Local Outlier Factor': 'about.md'
+        - Classification:
+            - 'License': 'about.md'
+        - Clustering:
+            - 'K-Means': 'about.md'
+            - 'Local Outlier Factor': 'algorithms/clustering/local_outlier_detection.md'
+        

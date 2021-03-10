@@ -2,11 +2,9 @@
 
 For full documentation visit [mkdocs.org](https://www.mkdocs.org).
 
-------- 
-
 ## Commands
 
-* `mkdocs new [dir-name]` - Create a **new** project.
+* `mkdocs new [dir-name]` - Create a new project.
 * `mkdocs serve` - Start the live-reloading docs server.
 * `mkdocs build` - Build the documentation site.
 * `mkdocs -h` - Print help message and exit.
@@ -18,15 +16,15 @@ For full documentation visit [mkdocs.org](https://www.mkdocs.org).
         index.md  # The documentation homepage.
         ...       # Other markdown pages, images and other files.
 
+## asd
+asdasdasdadsa
+
 
 ```python
 def fn():
     pass
 ```
-### asdf
-asdasd
-asd
-
+## asdf
 
 ```
 Fenced code blocks are like Standard #dfdsf
@@ -39,47 +37,18 @@ code block.
     def fn():
         pass
 
-
-#Table markdown table
-
 First Header | Second Header | Third Header
 ------------ | ------------- | ------------
 Content Cell | Content Cell  | Content Cell
 Content Cell | Content Cell  | Content Cell
 
-<!-- <a href="http://www.youtube.com/watch?feature=player_embedded&v=aNLIWvk2CRY
-" target="_blank"><img src="http://img.youtube.com/vi/aNLIWvk2CRY/0.jpg" 
-alt="IMAGE ALT TEXT HERE" width="12" height="12" border="10" /></a> -->
-
-#Figure A Matplotlib figure
-```python
-import matplotlib.pyplot as plt
-plt.plot([2, 4])
-```
-```python
-print(1)
-```
-## Examples
 
 
-#Fig Markdown link for an image can be numbered. {#cat#}
-![jpg](img/temp.jpg =100x20)
+[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/-0cb7_rrErQ/0.jpg)](http://www.youtube.com/watch?v=-0cb7_rrErQ)
 
-```python
-from mlxtend.classifier import EnsembleVoteClassifier
-```
 
-```python
-plt.plot([2, 4])
-```
 
-```python
-import plotly.express as px
-df = px.data.iris() # iris is a pandas DataFrame
-fig = px.scatter(df, x="sepal_width", y="sepal_length")
-fig.show()
-```
-
+## **Examples**
 
 ```python
 import numpy as np
@@ -103,13 +72,12 @@ eclf = EnsembleVoteClassifier(clfs=[clf1, clf2, clf3],
 # Loading some example data
 X, y = iris_data()
 X = X[:,[0, 2]]
-```
 
-```python
 # Plotting Decision Regions
 
 gs = gridspec.GridSpec(2, 2)
-fig = plt.figure(figsize=(20, 16))
+fig = plt.figure(figsize=(10, 8))
+
 labels = ['Logistic Regression',
           'Random Forest',
           'RBF kernel SVM',
@@ -127,7 +95,3 @@ for clf, lab, grd in zip([clf1, clf2, clf3, eclf],
 
 plt.show()
 ```
-
-#Fig Markdown link for an image can be numbered. {#cat#}
-<img src="img/temp.jpg" alt="drawing" height = "850" width="1000"/>
-
