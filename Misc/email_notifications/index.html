@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../../img/favicon.ico">
+    <title>Email Notifications &mdash; ml-nest</title>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/v4-shims.css">
+    <link rel="stylesheet" href="../../css/theme.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/v4-shims.css">
+    <link rel="stylesheet" href="../../css/pheasant.css">
+    <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script> 
+</head>
+
+<body ontouchstart="">
+    <div id="container">
+        <aside>
+            <div class="home">
+                <div class="title">
+                    <button class="hamburger"></button>
+                    <a href="../.." class="site-name"> ml-nest</a>
+                </div>
+                <div class="search">
+                    <div role="search">
+    <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+        <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+    </form>
+</div>
+                </div>
+            </div>
+            <nav class="nav">
+                <ul class="root">
+                    <li class="toctree-l1">
+<a class="nav-item" href="../..">Home</a></li>
+                    <li class="toctree-l1"><button class="section nav-item">Algorithms</button>
+<ul class="subnav">
+    <li class="toctree-l2"><button class="section nav-item hide">Feature Engineering</button>
+<ul class="subnav hide">
+    <li class="toctree-l3"><button class="section nav-item hide">Feature</button>
+<ul class="subnav hide">
+    <li class="toctree-l4">
+<a class="nav-item" href="../../about/">Local Outlier Factor</a></li>
+</ul></li>
+</ul></li>
+    <li class="toctree-l2"><button class="section nav-item hide">Feature Elimination</button>
+<ul class="subnav hide">
+    <li class="toctree-l3">
+<a class="nav-item" href="../../about/">Local Outlier Factor</a></li>
+</ul></li>
+    <li class="toctree-l2"><button class="section nav-item hide">Classification</button>
+<ul class="subnav hide">
+    <li class="toctree-l3">
+<a class="nav-item" href="../../about/">License</a></li>
+</ul></li>
+    <li class="toctree-l2"><button class="section nav-item hide">Clustering</button>
+<ul class="subnav hide">
+    <li class="toctree-l3">
+<a class="nav-item" href="../../about/">K-Means</a></li>
+    <li class="toctree-l3"><a class="nav-item" href="../../algorithms/clustering/local_outlier_detection/">Local Outlier Factor</a></li>
+</ul></li>
+</ul></li>
+                    <li class="toctree-l1"><button class="section nav-item">Technology</button>
+<ul class="subnav">
+    <li class="toctree-l2"><button class="section nav-item hide">SQL</button>
+<ul class="subnav hide">
+    <li class="toctree-l3"><a class="nav-item" href="../../Technology/SQL/Indexing/">Indexing</a></li>
+</ul></li>
+</ul></li>
+                    <li class="toctree-l1"><button class="section nav-item">Documentation</button>
+<ul class="subnav">
+    <li class="toctree-l2"><a class="nav-item" href="../../Documentations/mk-docs/">mk-docs</a></li>
+    <li class="toctree-l2">
+<a class="nav-item" href="../../Documentations/blob-storage/">azure blob storage</a></li>
+</ul></li>
+                    <li class="toctree-l1"><button class="section nav-item">Misc</button>
+<ul class="subnav">
+    <li class="toctree-l2 current"><a class="nav-item current" href="./">Email Notifications</a>
+<ul class="subnav">
+<li class="toctree-l3"><a class="nav-item toc" href="#step-1">Step-1</a></li>
+<li class="toctree-l3"><a class="nav-item toc" href="#step-2">Step-2</a></li>
+<li class="toctree-l3"><a class="nav-item toc" href="#requirements">Requirements</a></li>
+</ul></li>
+</ul></li>
+                </ul>
+            </nav>
+            <div class="repo">
+    <div class="previous"><a href="../../Documentations/blob-storage/">&laquo; Previous</a></div>
+</div>
+        </aside>
+        <div id="spacer"><button class="arrow"></button></div>
+        <main>
+            <div class="home-top">
+                <button class="hamburger"></button>
+                <a href="../.." class="site-name"> ml-nest</a>
+            </div>
+            <div id="main">
+                <nav class="breadcrumbs">
+<ul>
+    <li>Misc</li>
+</ul>
+</nav>
+                <div id="content">
+<h1 id="introduction">Introduction</h1>
+<p>This page will guide you on how to send out email notifications using python.</p>
+<h2 id="step-1">Step-1</h2>
+<p>Need to enable "Less secure app access" in google account settings from the sender's email address. 
+For that go to this <a href="https://myaccount.google.com/lesssecureapps">link</a> and enable it.</p>
+<h2 id="step-2">Step-2</h2>
+<p>Once that's done, open the python termainal and run this code with the appropriate values.
+<br>
+Make sure you make your passwords as environment variables otherwise your google account might get hacked.</p>
+<div class="pheasant-fenced-code"><div class="cached"><div class="cell jupyter input"><div class="code"><pre><code class=""># Importing packages
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
+# The mail addresses and password
+sender_address = &#39;id@gmail.com&#39;
+sender_pass = &#39;passwords&#39;
+receiver_address = &#39;id@gmail.com&#39; # can be any id
+
+# Content
+mail_content = &#34;&#34;&#34;content&#34;&#34;&#34;
+subject = &#34;&#34;&#34;subject&#34;&#34;&#34;
+
+
+def send_email_gmail(sender_address, sender_pass, receiver_address, mail_content, subject):
+    #Setup the MIME
+    message = MIMEMultipart()
+    message[&#39;From&#39;] = sender_address
+    message[&#39;To&#39;] = receiver_address
+    message[&#39;Subject&#39;] = subject   #The subject line
+    #The body and the attachments for the mail
+    message.attach(MIMEText(mail_content, &#39;plain&#39;))
+    #Create SMTP session for sending the mail
+    session = smtplib.SMTP(&#39;smtp.gmail.com&#39;, 587) #use gmail with port
+    # session = smtplib.SMTP(&#39;smtp-mail.outlook.com&#39;, 587)
+    session.starttls() #enable security
+    session.login(sender_address, sender_pass) #login with mail_id and password
+    text = message.as_string()
+    session.sendmail(sender_address, receiver_address, text)
+    session.quit()
+
+send_email_gmail(sender_address, sender_pass, receiver_address, mail_content, subject)</code></pre></div>
+<div class="report"><p><span class="count">[1]</span>
+<span class="start"></span> (<span class="time"></span>)
+<span class="right"><span class="kernel"></span> (<span class="total"></span>)</span></p></div></div></div></div>
+
+<h2 id="requirements">Requirements</h2>
+<pre><code>cachetools==4.2.1
+certifi==2020.12.5
+chardet==4.0.0
+cssselect==1.1.0
+cssutils==2.2.0
+email-to==0.1.0
+idna==2.10
+lxml==4.6.3
+Markdown==3.3.4
+premailer==3.8.0
+requests==2.25.1
+urllib3==1.26.4
+</code></pre></div>
+                <footer>
+    <div class="footer-buttons">
+        <div class="previous"><a href="../../Documentations/blob-storage/" title="azure blob storage"><span>Previous</span></a></div>
+    </div>
+    <div class="footer-note">
+        <p>
+            Built with <a href="http://www.mkdocs.org">MkDocs</a> using
+            <a href="https://github.com/daizutabi/mkdocs-ivory">Ivory theme</a>.
+        </p>
+    </div>
+</footer>
+            </div>
+        </main>
+    </div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js"></script>
+    <script src="../../js/pheasant.js"></script>
+    <script src="../../search/main.js"></script>
+</body>
+
+</html>
