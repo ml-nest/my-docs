@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <title>Local Outlier Factor &mdash; ml-nest</title>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:400,700">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/v4-shims.css">
+    <link rel="stylesheet" href="../../../css/theme.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.8.1/css/v4-shims.css">
+    <link rel="stylesheet" href="../../../css/pheasant.css">
+    <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad();
+    </script> 
+</head>
+
+<body ontouchstart="">
+    <div id="container">
+        <aside>
+            <div class="home">
+                <div class="title">
+                    <button class="hamburger"></button>
+                    <a href="../../.." class="site-name"> ml-nest</a>
+                </div>
+                <div class="search">
+                    <div role="search">
+    <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+        <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+    </form>
+</div>
+                </div>
+            </div>
+            <nav class="nav">
+                <ul class="root">
+                    <li class="toctree-l1">
+<a class="nav-item" href="../../..">Home</a></li>
+                    <li class="toctree-l1"><button class="section nav-item">Algorithms</button>
+<ul class="subnav">
+    <li class="toctree-l2"><button class="section nav-item hide">Feature Engineering</button>
+<ul class="subnav hide">
+    <li class="toctree-l3"><button class="section nav-item hide">Feature</button>
+<ul class="subnav hide">
+    <li class="toctree-l4">
+<a class="nav-item" href="../../../about/">Local Outlier Factor</a></li>
+</ul></li>
+</ul></li>
+    <li class="toctree-l2"><button class="section nav-item hide">Feature Elimination</button>
+<ul class="subnav hide">
+    <li class="toctree-l3">
+<a class="nav-item" href="../../../about/">Local Outlier Factor</a></li>
+</ul></li>
+    <li class="toctree-l2"><button class="section nav-item hide">Classification</button>
+<ul class="subnav hide">
+    <li class="toctree-l3">
+<a class="nav-item" href="../../../about/">License</a></li>
+</ul></li>
+    <li class="toctree-l2 current"><button class="section nav-item">Clustering</button>
+<ul class="subnav">
+    <li class="toctree-l3">
+<a class="nav-item" href="../../../about/">K-Means</a></li>
+    <li class="toctree-l3 current"><a class="nav-item current" href="./">Local Outlier Factor</a>
+<ul class="subnav">
+<li class="toctree-l4"><a class="nav-item toc" href="#selection-criteria">Selection criteria</a></li>
+<li class="toctree-l4"><a class="nav-item toc" href="#how-it-works">How it works?</a></li>
+<li class="toctree-l4"><a class="nav-item toc" href="#hyperparameter-selection">Hyperparameter Selection</a></li>
+<li class="toctree-l4"><a class="nav-item toc" href="#alternatives">Alternatives</a></li>
+<li class="toctree-l4"><a class="nav-item toc" href="#disadvantages">Disadvantages</a></li>
+<li class="toctree-l4"><a class="nav-item toc" href="#alternatives_1">Alternatives</a></li>
+</ul></li>
+</ul></li>
+</ul></li>
+                    <li class="toctree-l1"><button class="section nav-item">Technology</button>
+<ul class="subnav">
+    <li class="toctree-l2"><button class="section nav-item hide">SQL</button>
+<ul class="subnav hide">
+    <li class="toctree-l3"><a class="nav-item" href="../../../Technology/SQL/Indexing/">Indexing</a></li>
+</ul></li>
+</ul></li>
+                    <li class="toctree-l1"><button class="section nav-item">Documentation</button>
+<ul class="subnav">
+    <li class="toctree-l2"><a class="nav-item" href="../../../Documentations/mk-docs/">mk-docs</a></li>
+    <li class="toctree-l2">
+<a class="nav-item" href="../../../Documentations/blob-storage/">azure blob storage</a></li>
+</ul></li>
+                    <li class="toctree-l1"><button class="section nav-item">Misc</button>
+<ul class="subnav">
+    <li class="toctree-l2"><a class="nav-item" href="../../../Misc/email_notifications/">Email Notifications</a></li>
+</ul></li>
+                </ul>
+            </nav>
+            <div class="repo">
+    <div class="previous"><a href="../../../about/">&laquo; Previous</a></div>
+    <div class="next"><a href="../../../Technology/SQL/Indexing/">Next &raquo;</a></div>
+</div>
+        </aside>
+        <div id="spacer"><button class="arrow"></button></div>
+        <main>
+            <div class="home-top">
+                <button class="hamburger"></button>
+                <a href="../../.." class="site-name"> ml-nest</a>
+            </div>
+            <div id="main">
+                <nav class="breadcrumbs">
+<ul>
+    <li>Algorithms &raquo; </li><li>Clustering</li>
+</ul>
+</nav>
+                <div id="content">
+<h1 id="introduction">Introduction</h1>
+<ul>
+<li>compares local density of the outliers to the local density of its K neighbours</li>
+<li>if a points local density is significantly lower than its K nearest neighbours, it can be called as an anomaly</li>
+<li>this density is calculated by the inverse of the reachability distance</li>
+</ul>
+<h2 id="selection-criteria">Selection criteria</h2>
+<ul>
+<li>used when the anomaly is very close to the actual points but less densely packed</li>
+<li>will flag high density and sparse clusters as normal, but a loose point near a dense cluster as an anomaly</li>
+</ul>
+<h2 id="how-it-works">How it works?</h2>
+<ul>
+<li>Considering a dataset which has already formed clusters</li>
+</ul>
+<div class="pheasant-fenced-code"><div class="cached"><div class="cell jupyter input"><div class="code"><pre><code class="python">import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+# Generate normal (not abnormal) training observations
+X = 0.3 * np.random.randn(100, 2) # create a normal distribution between 0 and 1 of the required shape
+X_train = np.r_[X + 2, X - 2] # concat multiple array&#39;s of the same shape together
+
+# Generate new normal (not abnormal) observations
+X = 0.3 * np.random.randn(20, 2)
+X_test = np.r_[X + 2, X - 2]
+# Generate some abnormal novel observations
+X_outliers = np.random.uniform(low=-4, high=4, size=(20, 2))
+
+df = pd.DataFrame(np.r_[X_train, X_test, X_outliers], columns = [&#39;x&#39;, &#39;y&#39;])
+df.head()</code></pre></div>
+<div class="report"><p><span class="count">[1]</span>
+<span class="start">2021-04-26 11:50:57</span> (<span class="time">225ms</span>)
+<span class="right"><span class="kernel">python3</span> (<span class="total">475ms</span>)</span></p></div></div>
+
+<div class="cell jupyter display"><div class="content"><table class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th>x</th>
+      <th>y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2.090766</td>
+      <td>2.050742</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.624724</td>
+      <td>2.229667</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2.146648</td>
+      <td>1.501602</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2.334450</td>
+      <td>2.197099</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2.188459</td>
+      <td>1.195616</td>
+    </tr>
+  </tbody>
+</table></div></div></div></div>
+
+<div class="pheasant-fenced-code"><div class="cached"><div class="cell jupyter input"><div class="code"><pre><code class="python">plt.scatter(df[&#39;x&#39;], df[&#39;y&#39;])
+plt.show()</code></pre></div>
+<div class="report"><p><span class="count">[2]</span>
+<span class="start">2021-04-26 11:50:57</span> (<span class="time">95.4ms</span>)
+<span class="right"><span class="kernel">python3</span> (<span class="total">571ms</span>)</span></p></div></div>
+
+<div class="cell jupyter display"><div class="content"><p><img alt="image/png" src="data:image/png;base64,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
+"/></p></div></div></div></div>
+
+<ul>
+<li><strong>Step 1:</strong> Find K nearest datapoints using eucleidian distance from the point under consideration, we are assuming K to be 3 in this case</li>
+</ul>
+<div class="pheasant-fenced-code"><div class="cached"><div class="cell jupyter input"><div class="code"><pre><code class="python"># Getting indices for each of the point
+temp = df[[&#39;x&#39;, &#39;y&#39;]].reset_index()
+
+# Applying cross join to calculate Euclidean distance
+# Adding 0 column for cross join
+temp[0] = 0
+temp = pd.merge(temp, temp, how = &#39;outer&#39;, on = 0)
+# Dropping 0 column
+del temp[0]
+
+# Calculating Euclidean distance
+temp[&#39;eu_dist&#39;] = ((temp[&#39;x_x&#39;] - temp[&#39;x_y&#39;])**2 + (temp[&#39;y_x&#39;] - temp[&#39;y_y&#39;])**2)**0.5
+
+# Dropping zero values because they will be same point
+temp = temp[temp[&#39;eu_dist&#39;] != 0]
+
+# Adding a rank by distance to each datapoint to get the closest K datapoint
+temp[&#34;rank&#34;] = temp.groupby(&#34;index_x&#34;)[&#34;eu_dist&#34;].rank(&#34;min&#34;, ascending=True)
+
+#let k = 10
+k = 10
+temp = temp[temp[&#39;rank&#39;] &lt;=k]
+
+temp.head()</code></pre></div>
+<div class="report"><p><span class="count">[3]</span>
+<span class="start">2021-04-26 11:50:57</span> (<span class="time">51.2ms</span>)
+<span class="right"><span class="kernel">python3</span> (<span class="total">622ms</span>)</span></p></div></div>
+
+<div class="cell jupyter display"><div class="content"><table class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th>index_x</th>
+      <th>x_x</th>
+      <th>y_x</th>
+      <th>index_y</th>
+      <th>x_y</th>
+      <th>y_y</th>
+      <th>eu_dist</th>
+      <th>rank</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>10</th>
+      <td>0</td>
+      <td>2.090766</td>
+      <td>2.050742</td>
+      <td>10</td>
+      <td>2.044958</td>
+      <td>2.050365</td>
+      <td>0.045810</td>
+      <td>2.0</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>0</td>
+      <td>2.090766</td>
+      <td>2.050742</td>
+      <td>14</td>
+      <td>2.140724</td>
+      <td>2.088252</td>
+      <td>0.062473</td>
+      <td>4.0</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>0</td>
+      <td>2.090766</td>
+      <td>2.050742</td>
+      <td>21</td>
+      <td>2.005596</td>
+      <td>1.990792</td>
+      <td>0.104153</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>0</td>
+      <td>2.090766</td>
+      <td>2.050742</td>
+      <td>34</td>
+      <td>2.096372</td>
+      <td>1.961204</td>
+      <td>0.089713</td>
+      <td>6.0</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>0</td>
+      <td>2.090766</td>
+      <td>2.050742</td>
+      <td>47</td>
+      <td>2.121241</td>
+      <td>2.093080</td>
+      <td>0.052166</td>
+      <td>3.0</td>
+    </tr>
+  </tbody>
+</table></div></div></div></div>
+
+<ul>
+<li><strong>Step 2:</strong> Calculate reachability distance from the considered point to its neighbours (which also equals the maximum distance between Kth distance of the other point or the euclidian distance of that point)</li>
+</ul>
+<div class="pheasant-fenced-code"><div class="cached"><div class="cell jupyter input"><div class="code"><pre><code class="python"># Sorting values to get the kth distance for each point
+temp_2 = temp.sort_values([&#39;index_x&#39;, &#39;eu_dist&#39;], ascending = [True,False]).reset_index(drop = True)[[&#39;index_x&#39;, &#39;index_y&#39;,&#39;eu_dist&#39;]]
+
+# Getting the kth value
+min_indices = []
+
+for i in np.unique(np.array(temp_2[&#39;index_x&#39;])):
+    min_indices.append(min(temp_2[temp_2[&#39;index_x&#39;] == i].index))
+
+kth_distance = temp_2[temp_2.index.isin(min_indices)]
+
+kth_distance = kth_distance.rename(columns={&#34;eu_dist&#34;: &#34;kth_dist&#34;, &#34;index_x&#34;: &#34;point_label&#34;})
+del kth_distance[&#39;index_y&#39;]
+
+kth_distance.head()</code></pre></div>
+<div class="report"><p><span class="count">[4]</span>
+<span class="start">2021-04-26 11:50:57</span> (<span class="time">149ms</span>)
+<span class="right"><span class="kernel">python3</span> (<span class="total">771ms</span>)</span></p></div></div>
+
+<div class="cell jupyter display"><div class="content"><table class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th>point_label</th>
+      <th>kth_dist</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>0.104153</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>1</td>
+      <td>0.194555</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>2</td>
+      <td>0.231607</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>3</td>
+      <td>0.237229</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>4</td>
+      <td>0.470889</td>
+    </tr>
+  </tbody>
+</table></div></div></div></div>
+
+<div class="pheasant-fenced-code"><div class="cached"><div class="cell jupyter input"><div class="code"><pre><code class="python"># Calculating reachability distance
+reach_dist = pd.merge(temp_2, kth_distance, left_on = &#39;index_y&#39;, right_on= &#39;point_label&#39;, how = &#39;left&#39;)
+del reach_dist[&#39;point_label&#39;]
+
+reach_dist[&#39;rd&#39;] = reach_dist[[&#39;eu_dist&#39;,&#39;kth_dist&#39;]].max(axis = 1)
+del reach_dist[&#39;eu_dist&#39;]
+del reach_dist[&#39;kth_dist&#39;]
+
+reach_dist.head()</code></pre></div>
+<div class="report"><p><span class="count">[5]</span>
+<span class="start">2021-04-26 11:50:57</span> (<span class="time">17.9ms</span>)
+<span class="right"><span class="kernel">python3</span> (<span class="total">789ms</span>)</span></p></div></div>
+
+<div class="cell jupyter display"><div class="content"><table class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th>index_x</th>
+      <th>index_y</th>
+      <th>rd</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>21</td>
+      <td>0.123627</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>71</td>
+      <td>0.103484</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>79</td>
+      <td>0.145766</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>205</td>
+      <td>0.112682</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>34</td>
+      <td>0.094852</td>
+    </tr>
+  </tbody>
+</table></div></div></div></div>
+
+<div class="pheasant-fenced-code"><div class="cached"><div class="cell jupyter input"><div class="code"><pre><code class="python">mean_rd = pd.DataFrame(reach_dist.groupby([&#39;index_x&#39;])[&#39;rd&#39;].mean()).reset_index()
+
+mean_rd = mean_rd.rename(columns={&#34;index_x&#34;: &#34;point_label&#34;})
+mean_rd.head()</code></pre></div>
+<div class="report"><p><span class="count">[6]</span>
+<span class="start">2021-04-26 11:50:57</span> (<span class="time">121ms</span>)
+<span class="right"><span class="kernel">python3</span> (<span class="total">910ms</span>)</span></p></div></div>
+
+<div class="cell jupyter display"><div class="content"><table class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th>point_label</th>
+      <th>rd</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>0.121582</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>0.213474</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>0.225700</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>0.231495</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>0.380704</td>
+    </tr>
+  </tbody>
+</table></div></div></div></div>
+
+<ul>
+<li><strong>Step 3:</strong> Calculate local reachability density</li>
+</ul>
+<div class="pheasant-fenced-code"><div class="cached"><div class="cell jupyter input"><div class="code"><pre><code class="python"># Getting LRD(local reachability density) for individual points
+lrd_all_pts = mean_rd.copy()
+lrd_all_pts[&#39;lrd&#39;] = 1/lrd_all_pts[&#39;rd&#39;]
+del lrd_all_pts[&#39;rd&#39;]
+
+lrd_all_pts.head()</code></pre></div>
+<div class="report"><p><span class="count">[7]</span>
+<span class="start">2021-04-26 11:50:57</span> (<span class="time">106ms</span>)
+<span class="right"><span class="kernel">python3</span> (<span class="total">1.02s</span>)</span></p></div></div>
+
+<div class="cell jupyter display"><div class="content"><table class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th>point_label</th>
+      <th>lrd</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>8.224921</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>4.684415</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>4.430659</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>4.319752</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>2.626713</td>
+    </tr>
+  </tbody>
+</table></div></div></div></div>
+
+<div class="pheasant-fenced-code"><div class="cached"><div class="cell jupyter input"><div class="code"><pre><code class="python"># Getting average LRD from all the neighbours
+avg_lrd = pd.merge(temp_2[[&#39;index_x&#39;, &#39;index_y&#39;]], lrd_all_pts, left_on = &#39;index_y&#39;, right_on = &#39;point_label&#39;, how = &#39;left&#39;)
+avg_lrd = pd.DataFrame(avg_lrd.groupby([&#39;index_x&#39;])[&#39;lrd&#39;].mean()).reset_index()
+avg_lrd = avg_lrd.rename({&#34;index_x&#34;:&#34;point_label&#34;, &#34;lrd&#34;:&#34;avg_lrd_neigh&#34;}, axis = 1)
+
+avg_lrd.head()</code></pre></div>
+<div class="report"><p><span class="count">[8]</span>
+<span class="start">2021-04-26 11:50:57</span> (<span class="time">248ms</span>)
+<span class="right"><span class="kernel">python3</span> (<span class="total">1.26s</span>)</span></p></div></div>
+
+<div class="cell jupyter display"><div class="content"><table class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th>point_label</th>
+      <th>avg_lrd_neigh</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>8.149488</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>4.766033</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>5.837824</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>5.684368</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>4.003407</td>
+    </tr>
+  </tbody>
+</table></div></div></div></div>
+
+<ul>
+<li><strong>Step 4:</strong> Calculate lof</li>
+</ul>
+<div class="pheasant-fenced-code"><div class="cached"><div class="cell jupyter input"><div class="code"><pre><code class="python"># Calculating LOF by dividing average LRD of neighbours to the actual LRD of the point
+lof = pd.merge(avg_lrd, lrd_all_pts, on = &#39;point_label&#39;, how = &#39;left&#39;)
+lof[&#39;lof&#39;] = lof[&#39;avg_lrd_neigh&#39;]/ lof[&#39;lrd&#39;]
+del lof[&#39;lrd&#39;]
+del lof[&#39;avg_lrd_neigh&#39;]
+
+lof.sort_values(&#39;lof&#39;, ascending = False)[:10]</code></pre></div>
+<div class="report"><p><span class="count">[9]</span>
+<span class="start">2021-04-26 11:50:58</span> (<span class="time">147ms</span>)
+<span class="right"><span class="kernel">python3</span> (<span class="total">1.41s</span>)</span></p></div></div>
+
+<div class="cell jupyter display"><div class="content"><table class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th>point_label</th>
+      <th>lof</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>247</th>
+      <td>247</td>
+      <td>11.434103</td>
+    </tr>
+    <tr>
+      <th>243</th>
+      <td>243</td>
+      <td>9.437840</td>
+    </tr>
+    <tr>
+      <th>240</th>
+      <td>240</td>
+      <td>6.687920</td>
+    </tr>
+    <tr>
+      <th>248</th>
+      <td>248</td>
+      <td>4.986595</td>
+    </tr>
+    <tr>
+      <th>244</th>
+      <td>244</td>
+      <td>4.896795</td>
+    </tr>
+    <tr>
+      <th>256</th>
+      <td>256</td>
+      <td>4.565463</td>
+    </tr>
+    <tr>
+      <th>242</th>
+      <td>242</td>
+      <td>4.527704</td>
+    </tr>
+    <tr>
+      <th>245</th>
+      <td>245</td>
+      <td>4.084745</td>
+    </tr>
+    <tr>
+      <th>255</th>
+      <td>255</td>
+      <td>3.948657</td>
+    </tr>
+    <tr>
+      <th>253</th>
+      <td>253</td>
+      <td>3.916511</td>
+    </tr>
+  </tbody>
+</table></div></div></div></div>
+
+<ul>
+<li>More the value of this LOF is higher, more the probablity of this point becoming an anomaly</li>
+</ul>
+<div class="pheasant-fenced-code"><div class="cached"><div class="cell jupyter input"><div class="code"><pre><code class="python"># Getting x and y coordinates for the given points
+lof_df = pd.merge(df[[&#39;x&#39;, &#39;y&#39;]].reset_index(), lof, left_on = &#39;index&#39;, right_on = &#39;point_label&#39;, how = &#39;left&#39;)
+del lof_df[&#39;index&#39;]
+del lof_df[&#39;point_label&#39;]
+
+lof_df.head()</code></pre></div>
+<div class="report"><p><span class="count">[10]</span>
+<span class="start">2021-04-26 11:50:58</span> (<span class="time">155ms</span>)
+<span class="right"><span class="kernel">python3</span> (<span class="total">1.57s</span>)</span></p></div></div>
+
+<div class="cell jupyter display"><div class="content"><table class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th>x</th>
+      <th>y</th>
+      <th>lof</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2.090766</td>
+      <td>2.050742</td>
+      <td>0.990829</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.624724</td>
+      <td>2.229667</td>
+      <td>1.017423</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2.146648</td>
+      <td>1.501602</td>
+      <td>1.317597</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2.334450</td>
+      <td>2.197099</td>
+      <td>1.315902</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2.188459</td>
+      <td>1.195616</td>
+      <td>1.524113</td>
+    </tr>
+  </tbody>
+</table></div></div></div></div>
+
+<div class="pheasant-fenced-code"><div class="cached"><div class="cell jupyter input"><div class="code"><pre><code class="python">thresh = 1.8
+plt.scatter(lof_df[lof_df[&#39;lof&#39;] &gt; thresh][&#39;x&#39;], lof_df[lof_df[&#39;lof&#39;] &gt; thresh][&#39;y&#39;])
+plt.scatter(lof_df[lof_df[&#39;lof&#39;] &lt;= thresh][&#39;x&#39;], lof_df[lof_df[&#39;lof&#39;] &lt;= thresh][&#39;y&#39;])
+
+plt.show()</code></pre></div>
+<div class="report"><p><span class="count">[11]</span>
+<span class="start">2021-04-26 11:50:58</span> (<span class="time">194ms</span>)
+<span class="right"><span class="kernel">python3</span> (<span class="total">1.76s</span>)</span></p></div></div>
+
+<div class="cell jupyter display"><div class="content"><p><img alt="image/png" src="data:image/png;base64,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
+"/></p></div></div></div></div>
+
+<h2 id="hyperparameter-selection">Hyperparameter Selection</h2>
+<ul>
+<li>How to select the correct K-value?<ul>
+<li>Minimum K should be considered as the number of points which can be considered as a cluster, so that other clusters with less points can be considered outliers. When K &lt; 10, LOF is highly volatile</li>
+<li>Max K should be selected as the points to be considered as outliers if clustered together</li>
+</ul>
+</li>
+</ul>
+<h2 id="alternatives">Alternatives</h2>
+<p>How to select the correct value for LOF</p>
+<p>User dependendent</p>
+<h2 id="disadvantages">Disadvantages</h2>
+<ul>
+<li>LOF &lt; 1 is definitely an inlier but the inverse statement may not be as true</li>
+<li>strong local fluctuations may increase the number of false positives</li>
+</ul>
+<h2 id="alternatives_1">Alternatives</h2>
+<ul>
+<li>can use feature bagging instead to reduce FP</li>
+<li>can use local outlier probability to reduce the chance of choosing the wrong K</li>
+</ul>
+<p>Why reachability distance is considered instead of euclidean distance?</p></div>
+                <footer>
+    <div class="footer-buttons">
+        <div class="previous"><a href="../../../about/" title="K-Means"><span>Previous</span></a></div>
+        <div class="next"><a href="../../../Technology/SQL/Indexing/" title="Indexing"><span>Next</span></a></div>
+    </div>
+    <div class="footer-note">
+        <p>
+            Built with <a href="http://www.mkdocs.org">MkDocs</a> using
+            <a href="https://github.com/daizutabi/mkdocs-ivory">Ivory theme</a>.
+        </p>
+    </div>
+</footer>
+            </div>
+        </main>
+    </div>
+    <script>var base_url = '../../..';</script>
+    <script src="../../../js/theme.js"></script>
+    <script src="../../../js/pheasant.js"></script>
+    <script src="../../../search/main.js"></script>
+</body>
+
+</html>

@@ -1,11 +1,14 @@
-site_name: My Notes
+site_name: ml-nest
 theme: ivory
 plugins:
+  - search
   - pheasant
+  
 nav:
     - Home: index.md
     - Algorithms:
         - Feature Engineering:
+            - Feature:
                 - 'Local Outlier Factor': 'about.md'
         - Feature Elimination:
             - 'Local Outlier Factor': 'about.md'
@@ -13,5 +16,12 @@ nav:
             - 'License': 'about.md'
         - Clustering:
             - 'K-Means': 'about.md'
-            - 'Local Outlier Factor': 'algorithms/clustering/local_outlier_detection.md'
-        
+            - 'Local Outlier Factor': 'algorithms/clustering/local_outlier_detection.md'    
+    - Technology:
+        - SQL:
+            - 'Indexing' : 'Technology/SQL/Indexing.md'
+    - Documentation:
+        - 'mk-docs' : 'Documentations/mk-docs.md'
+        - 'azure blob storage' : 'Documentations/blob-storage.md'
+    - Misc:
+        - 'Email Notifications' : 'Misc/email_notifications.md'
