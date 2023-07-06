@@ -1,4 +1,3 @@
-# Links
 For full documentation visit [mkdocs.org](https://www.mkdocs.org). <br>
 This is the pheasants documentation [link](https://pheasant.daizutabi.net/).
 

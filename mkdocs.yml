@@ -1,5 +1,22 @@
-site_name: ml-nest
-theme: ivory
+site_name: Bharat Anand Notes
+
+theme:
+    name: material
+
+    features:
+        - navigation.tabs
+        - navigation.indexes
+        # - toc.integrate
+        - header.autohide
+    palette:
+        - scheme: default
+        # primary: blue grey
+        # accent: black
+        
+extra_css:
+  - stylesheets/extra.css
+
+
 plugins:
   - search
   - pheasant
@@ -8,10 +25,16 @@ nav:
     - Home: index.md
     - Algorithms:
         - Feature Engineering:
-            - Feature:
-                - 'Local Outlier Factor': 'about.md'
+            - Feature: 
+                - 'algorithms/index.md'
+                - 'Understanding Features': 'Technology/SQL/abc.md'
+                - 'Local Outlier Factor2': 'about.md'
+                - 'Local Outlier Factor3': 'about.md'
         - Feature Elimination:
             - 'Local Outlier Factor': 'about.md'
+
+        - Regression:
+            - 'Linear Regression': 'algorithms/regression/reg.md'
         - Classification:
             - 'License': 'about.md'
         - Clustering:
